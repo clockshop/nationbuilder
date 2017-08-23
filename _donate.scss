@@ -1,0 +1,130 @@
+@font-face {
+  font-family: 'CircularBook';
+  src: url("circular-book.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CircularBookItalic';
+  src: url("circular-book-italic.otf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CircularBookBold';
+  src: url("circular-bold.otf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.nav-container.clearfix {
+	display: none;
+}
+
+div.main.width-container.clearfix {
+  padding-top: 140px!important;
+	.onecolumn-container.clearfix {
+    .content-pages-show-donation-wide {
+      h1 {
+        font-family: CircularBookBold;
+        font-size: 36px;
+        line-height: 38px;
+        text-transform: none;
+      }
+      .donate-fixed-header {
+        position: absolute;
+        text-align: center;
+        right: 0;
+        left: 0;
+        top: 30px;
+        p {
+          font-size: 18px;
+          font-family: CircularBookBold;
+          text-transform: uppercase;
+          display: inline-block;
+          border-bottom: 4px solid black;
+          padding-bottom: 3px;
+	        letter-spacing: .04em;
+        }
+      }
+      form {
+        .donationform-section.amount {
+          font-family: CircularBook;
+					font-size: 22px;
+          line-height: 32px;
+          p {
+          	margin-bottom: 20px;
+          }
+          .radio-inline {
+            span {
+              label {
+                font-size: 18px;
+                font-family: CircularBookBold;
+                color: black;
+                letter-spacing: .08em;
+                border-color: black;
+                border-width: 4px;
+    						padding: 8px 15px;
+             	}
+            }
+          }
+          .other-amount-wrap {
+            position: relative;
+            label {
+            	font-size: 20px;
+            }
+            input {
+            	background: none;
+							height: 40px;
+              padding-left: 25px;
+              font-size: 18px;
+              letter-spacing: .08em;
+              font-family: CircularBookBold;
+              border-bottom-width: 4px;
+              &:focus {
+              	border-color: black;
+              }
+            }
+            &:before {
+              content: '$';
+              position: absolute;
+              top: 35px;
+              left: 10px;
+              font-size: 18px;
+            }
+          }
+        }
+        .donationform-section.additional-info {
+          margin-top: 60px;
+          h3 {
+            font-family: CircularBookBold;
+            font-size: 28px;
+            line-height: 32px;
+          	text-transform: none;
+            margin-bottom: 30px;
+          }
+          h4 {
+            font-family: CircularBook;
+            font-size: 22px;
+            line-height: 28px;
+          	text-transform: none;
+            margin-bottom: 40px;
+          }
+          table {
+            td {
+              input {
+                margin-right: 15px;
+              }
+              label {
+                font-size: 18px;
+		            font-family: CircularBook;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
