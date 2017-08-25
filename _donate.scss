@@ -23,27 +23,71 @@
 	display: none;
 }
 
-a#main {
-	width: 70px;
-	height: 165px;
-	background-size: contain;
-}
-
-@media screen and (max-width: 999px) {
-	#main, #type {
-		display: none;
+body {
+	min-width: 320px;
+	a#type {
+		width: 70px;
+		height: 180px;
+		background-size: contain;
+		position: absolute;
+		background-position: right;
+		@media screen and (max-width: 479px) {
+			height: 120px;
+			margin-top: 75px;
+		}
+	}
+	a#main {
+		width: 50px;
+		height: 180px;
+		background-size: contain;
+		background-position: center;
+		position: absolute;
+		@media screen and (max-width: 479px) {
+			height: 120px;
+			background-size: 40px;
+			margin-top: 75px;
+			background-position-x: left;
+		}
+	}
+	.main {
+		@media screen and (max-width: 999px) {
+			width: 80%;
+			margin: 0 auto;
+			padding-left: 0;
+			padding-right: 0;
+		}
 	}
 }
 
 div.main.width-container.clearfix {
 	padding-top: 140px!important;
+	@media screen and (max-width: 768px) {
+		padding-top: 120px!important;
+		width: 100%;
+		padding-left: 65px;
+		padding-right: 65px;
+	}
+	@media screen and (max-width: 479px) {
+		padding-left: 55px;
+		padding-right: 55px;
+		padding-top: 75px!important;
+	}
 	.onecolumn-container.clearfix {
+		padding-left: 0;
+		padding-right: 0;
+		@media screen and (max-width: 768px) {
+			width: 100%;
+			margin: 0 auto;
+		}
 		.content-pages-show-donation-wide {
 			h1 {
 				font-family: CircularBookBold;
 				font-size: 36px;
-				line-height: 38px;
+				line-height: 40px;
 				text-transform: none;
+				@media screen and (max-width: 768px) {
+					text-align: center;
+				}
 			}
 			.donate-fixed-header {
 				position: absolute;
@@ -51,6 +95,9 @@ div.main.width-container.clearfix {
 				right: 0;
 				left: 0;
 				top: 30px;
+				@media screen and (max-width: 479px) {
+					top: 25px;
+				}
 				p {
 					font-size: 18px;
 					font-family: CircularBookBold;
@@ -59,6 +106,9 @@ div.main.width-container.clearfix {
 					border-bottom: 4px solid black;
 					padding-bottom: 3px;
 					letter-spacing: .04em;
+					@media screen and (max-width: 479px) {
+						font-size: 15px;
+					}
 				}
 			}
 			form {
@@ -66,11 +116,26 @@ div.main.width-container.clearfix {
 					font-family: CircularBook;
 					font-size: 22px;
 					line-height: 32px;
+					@media screen and (max-width: 768px) {
+						text-align: center;
+						margin-top: 30px;
+					}
 					p {
 						margin-bottom: 20px;
 					}
 					.radio-inline {
+						@media screen and (max-width: 768px) {
+							width: 100%;
+							max-width: 450px;
+							margin: 0 auto;
+							font-size: 0;
+						}
 						span {
+							@media screen and (max-width: 768px) {
+								width: 33.33%;
+								display: inline-block;
+								margin-bottom: 15px;
+							}
 							input {
 								&:checked+.active {
 									background-color: black;
@@ -89,10 +154,23 @@ div.main.width-container.clearfix {
 									background-color: black;
 									color: white;
 								}
+								@media screen and (max-width: 899px) {
+									margin-right: 10px;
+								}
+								@media screen and (max-width: 768px) {
+									width: 90%;
+									max-width: 140px;
+									margin: 0 auto;
+								}
 							}
 						}
 						.other-amount-wrap {
 							position: relative;
+							@media screen and (max-width: 768px) {
+								max-width: 440px;
+								margin: 10px auto 0;
+								text-align: left;
+							}
 							label {
 								font-size: 20px;
 							}
@@ -140,24 +218,40 @@ div.main.width-container.clearfix {
 						margin-bottom: 40px;
 					}
 					table {
-						td {
-							padding-right: 40px;
-							input {
-								margin-right: 20px;
-								-webkit-appearance: none;
-								background: white;
-								border: 4px solid black;
-								width: 18px;
-								padding: 0;
-								height: 18px;
-								cursor: pointer;
-								&:active, &:checked {
-									background: black;
-								}
+						width: 100%;
+						tr {
+							@media screen and (max-width: 768px) {
+								display: block;
 							}
-							label {
-								font-size: 18px;
-								font-family: CircularBook;
+							td {
+								width: 50%;
+								padding-right: 40px;
+								padding-bottom: 40px;
+								@media screen and (max-width: 768px) {
+									display: block;
+									width: 100%;
+									padding-right: 10px;
+								}
+								input {
+									margin-right: 20px;
+									-webkit-appearance: none;
+									background: white;
+									border: 4px solid black;
+									width: 18px;
+									padding: 0;
+									height: 18px;
+									cursor: pointer;
+									position: absolute;
+									&:active, &:checked {
+										background: black;
+									}
+								}
+								label {
+									font-size: 18px;
+									font-family: CircularBook;
+									padding-left: 40px;
+									display: block;
+								}
 							}
 						}
 					}
@@ -227,13 +321,25 @@ div.main.width-container.clearfix {
 						text-transform: uppercase;
 						padding: 8px 25px;
 						border: 4px solid black;
+						@media screen and (max-width: 768px) {
+							float: left;
+							margin-top: 50px;
+						}
+						@media screen and (max-width: 399px) {
+							width: 100%;
+						}
 						&:focus {
 							border: 4px solid black;
 						}
 					}
-					.page-tag {
-						margin-top: 5px;
-						line-height: 1;
+					.padbottom {
+						@media screen and (max-width: 768px) {
+							position: absolute;
+						}
+						.page-tag {
+							margin-top: 5px;
+							line-height: 1;
+						}
 					}
 				}
 			}
