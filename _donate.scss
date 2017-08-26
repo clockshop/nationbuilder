@@ -25,6 +25,7 @@
 
 body {
 	min-width: 320px;
+	position: relative;
 	a#type {
 		width: 70px;
 		height: 180px;
@@ -61,6 +62,7 @@ body {
 
 div.main.width-container.clearfix {
 	padding-top: 140px!important;
+	padding-bottom: 80px;
 	@media screen and (max-width: 768px) {
 		padding-top: 120px!important;
 		width: 100%;
@@ -68,8 +70,8 @@ div.main.width-container.clearfix {
 		padding-right: 65px;
 	}
 	@media screen and (max-width: 479px) {
-		padding-left: 55px;
-		padding-right: 55px;
+		padding-left: 50px;
+		padding-right: 50px;
 		padding-top: 75px!important;
 	}
 	.onecolumn-container.clearfix {
@@ -87,6 +89,10 @@ div.main.width-container.clearfix {
 				text-transform: none;
 				@media screen and (max-width: 768px) {
 					text-align: center;
+				}
+				@media screen and (max-width: 479px) {
+					font-size: 26px;
+					line-height: 31px;
 				}
 			}
 			.donate-fixed-header {
@@ -112,6 +118,8 @@ div.main.width-container.clearfix {
 				}
 			}
 			form {
+				.donationform-section.bank-account {
+				}
 				.donationform-section.amount {
 					font-family: CircularBook;
 					font-size: 22px;
@@ -119,6 +127,11 @@ div.main.width-container.clearfix {
 					@media screen and (max-width: 768px) {
 						text-align: center;
 						margin-top: 30px;
+					}
+					@media screen and (max-width: 479px) {
+						font-size: 16px;
+						line-height: 22px;
+						margin-top: 20px;
 					}
 					p {
 						margin-bottom: 20px;
@@ -135,6 +148,9 @@ div.main.width-container.clearfix {
 								width: 33.33%;
 								display: inline-block;
 								margin-bottom: 15px;
+							}
+							@media screen and (max-width: 479px) {
+								margin-bottom: 10px;
 							}
 							input {
 								&:checked+.active {
@@ -162,17 +178,26 @@ div.main.width-container.clearfix {
 									max-width: 140px;
 									margin: 0 auto;
 								}
+								@media screen and (max-width: 479px) {
+									width: 85%;
+									font-size: 15px;
+									min-width: 0;
+									padding: 8px 0px;
+								}
 							}
 						}
 						.other-amount-wrap {
 							position: relative;
 							@media screen and (max-width: 768px) {
-								max-width: 440px;
+								max-width: 96.66%;
 								margin: 10px auto 0;
 								text-align: left;
 							}
 							label {
 								font-size: 20px;
+								@media screen and (max-width: 479px) {
+									font-size: 15px;
+								}
 							}
 							input {
 								background: none;
@@ -196,6 +221,9 @@ div.main.width-container.clearfix {
 						}
 					}
 					.row-fluid {
+						@media screen and (max-width: 479px) {
+							text-align: left;
+						}            
 						div {
 							font-style: italic;
 						}
@@ -203,12 +231,20 @@ div.main.width-container.clearfix {
 				}
 				.donationform-section.additional-info {
 					margin-top: 50px;
+					@media screen and (max-width: 479px) {
+						margin-top: 30px;
+					}            
 					h3 {
 						font-family: CircularBookBold;
 						font-size: 28px;
 						line-height: 32px;
 						text-transform: none;
 						margin-bottom: 30px;
+						@media screen and (max-width: 479px) {
+							font-size: 20px;
+							line-height: 24px;
+							margin-bottom: 20px;
+						}
 					}
 					h4 {
 						font-family: CircularBook;
@@ -216,6 +252,11 @@ div.main.width-container.clearfix {
 						line-height: 28px;
 						text-transform: none;
 						margin-bottom: 40px;
+						@media screen and (max-width: 479px) {
+							font-size: 16px;
+							line-height: 22px;
+							margin-bottom: 25px;
+						}
 					}
 					table {
 						width: 100%;
@@ -232,6 +273,9 @@ div.main.width-container.clearfix {
 									width: 100%;
 									padding-right: 10px;
 								}
+								@media screen and (max-width: 479px) {
+									padding-bottom: 15px;
+								}
 								input {
 									margin-right: 20px;
 									-webkit-appearance: none;
@@ -245,12 +289,19 @@ div.main.width-container.clearfix {
 									&:active, &:checked {
 										background: black;
 									}
+									@media screen and (max-width: 479px) {
+										margin-left: 0;
+									}
 								}
 								label {
 									font-size: 18px;
 									font-family: CircularBook;
 									padding-left: 40px;
 									display: block;
+									@media screen and (max-width: 479px) {
+										font-size: 18px;
+										line-height: 22px;
+									}
 								}
 							}
 						}
@@ -264,6 +315,10 @@ div.main.width-container.clearfix {
 						line-height: 28px;
 						text-transform: none;
 						margin-bottom: 20px;
+						@media screen and (max-width: 479px) {
+							font-size: 16px;
+							margin-bottom: 10px;
+						}
 					}
 					input {
 						background: white;
@@ -275,6 +330,10 @@ div.main.width-container.clearfix {
 						&:focus {
 							border-bottom: 4px solid black;
 						}
+						@media screen and (max-width: 479px) {
+							font-size: 15px;
+							padding: 6px 0;
+						}
 					}
 				}
 				.donationform-section.billing {
@@ -282,10 +341,18 @@ div.main.width-container.clearfix {
 					font-size: 22px;
 					line-height: 28px;
 					text-transform: none;
+					@media screen and (max-width: 479px) {
+						margin-top: 30px;
+						font-size: 16px;
+					}
 					h3 {
 						font-family: CircularBookBold;
 						font-size: 28px;
 						text-transform: none;
+						@media screen and (max-width: 479px) {
+							font-size: 20px;
+							margin-bottom: 10px;
+						}
 					}
 					input, select {
 						background: white;
@@ -297,12 +364,28 @@ div.main.width-container.clearfix {
 						&:focus {
 							border-bottom: 4px solid black;
 						}
+						@media screen and (max-width: 479px) {
+							font-size: 15px;
+							padding-top: 6px;
+							padding-bottom: 6px;
+							margin-bottom: 12px!important;
+						}
 					}
 					select {
 						padding-top: 9px;
 						padding-bottom: 9px;
+						background-image: url(http://d3n8a8pro7vhmx.cloudfront.net/themes/53feaa2bebad6464d4000001/attachments/original/1503720149/select_arrow.png?1503720149);
+						background-repeat: no-repeat;
+						background-size: 14px 8px!important;
+						background-position: right 5px bottom 15px;
+						@media screen and (max-width: 479px) {
+							background-position: right 5px bottom 13px;
+						}
 						&:focus {
 							outline: none;
+						}
+						@media screen and (max-width: 479px) {
+							margin-top: 0;
 						}
 					}
 					#donation_last_name, #donation_billing_address_city {
@@ -310,10 +393,22 @@ div.main.width-container.clearfix {
 					}
 				}
 				.donationform-section.payment-section {
+					position: relative;
 					font-family: CircularBook;
 					font-size: 22px;
 					line-height: 28px;
 					text-transform: none;
+					@media screen and (max-width: 479px) {
+						font-size: 16px;
+						line-height: 22px;
+						margin-top: 20px;
+					}          
+					img {
+						@media screen and (max-width: 768px) {
+							float: left;
+							margin-right: 5px;
+						}          
+					}
 					.success-button {
 						font-family: CircularBookBold;
 						font-size: 18px;
@@ -321,11 +416,16 @@ div.main.width-container.clearfix {
 						text-transform: uppercase;
 						padding: 8px 25px;
 						border: 4px solid black;
+						&:active, &:focus {
+							background-color: black;
+							color: white;
+						}
 						@media screen and (max-width: 768px) {
 							float: left;
+							clear: left;
 							margin-top: 50px;
 						}
-						@media screen and (max-width: 399px) {
+						@media screen and (max-width: 479px) {
 							width: 100%;
 						}
 						&:focus {
@@ -335,6 +435,11 @@ div.main.width-container.clearfix {
 					.padbottom {
 						@media screen and (max-width: 768px) {
 							position: absolute;
+							bottom: -72px;
+						}
+						@media screen and (max-width: 479px) {
+							position: absolute;
+							bottom: -60px;
 						}
 						.page-tag {
 							margin-top: 5px;
@@ -345,4 +450,8 @@ div.main.width-container.clearfix {
 			}
 		}
 	}
+}
+
+footer {
+	display: none;
 }
