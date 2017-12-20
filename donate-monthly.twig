@@ -84,19 +84,19 @@
 {% include "breadcrumbs" %}
 
 <div class="donate-fixed-header">
-  <a href="https://clockshop.org/">
-	  <img class="logo-h" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53feaa2bebad6464d4000001/attachments/original/1513804117/logo_h.svg?1513804117">
-  </a>
-  <div>
-    <p>
-      <span class="one-time active">
-        Donate <br>One Time
-      </span>
-      <a class="monthly" href="https://clockshop.nationbuilder.com/monthly_contribution">
-        Donate <br>Monthly
-      </a>
-    </p>
-  </div>
+    <a href="https://clockshop.org/">
+        <img class="logo-h" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53feaa2bebad6464d4000001/attachments/original/1513804117/logo_h.svg?1513804117">
+    </a>
+    <div>
+    	<p>
+        <a class="one-time" href="https://clockshop.nationbuilder.com/donate">
+            Donate <br>One Time
+        </a>
+        <span class="monthly active">
+            Donate <br>Monthly
+        </span>
+      </p>
+    </div>
 </div>
 
 {% if page.headline.size > 0 %}
@@ -140,7 +140,7 @@ JUST STARTED
 {% error_messages_for donation %}
 
 <!-- Donation amounts -->
-<div class="donationform-section amount">
+<div class="donationform-section amount amount-monthly">
   <p>Please select the amount you would like to contribute:</p>
   {% if request.current_order %}
   {% for item in request.current_order.items %}
@@ -242,7 +242,7 @@ JUST STARTED
   </div>
 </div>
 
-<div class="donationform-section payment-section">
+<div class="donationform-section payment-section payment-section-monthly">
   {% if page.donation.merchant_account.is_corporate_contribution_required? %}
   {% check_box "is_corporate_contribution", class:"checkbox" %} This is a contribution from a business.
   {% endif %} 
