@@ -1,0 +1,282 @@
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width,user-scalable=no">
+
+<style>
+#main {
+    //display:none;  
+}
+
+.other-amount-wrap {
+    float:none;
+}
+
+input[type=text], input[type=email], input[type=tel] {
+    display:block;
+    width:100%;
+}
+
+select {
+    width:100%;
+    padding:15px 0;
+    margin-top:15px;	
+}
+
+input[type=checkbox] {
+    vertical-align:text-top;
+}
+
+.margin {
+    margin:40px 0 30px 0;
+}
+
+td {
+    padding-right:20px;
+    padding-bottom:20px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+
+    $('.donationform-section.amount :radio').change(function(){
+    $('.donationform-section.amount label').removeClass('active');
+    $('.donationform-section.amount input').prop('checked', false);
+    $(this).prop('checked', true);
+    $(this).next('label').addClass('active');
+    });
+
+    $("#donation_amount_other").keydown(function(e){
+    $('.donationform-section.amount span label').removeClass('active');
+    $('.donationform-section.amount span input').prop('checked', false);
+    $(this).prop('checked', true);
+    $(this).addClass('active');
+    
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+            return;
+    }
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }      
+    });
+
+    if($('.content-pages-show-donation-wide h1').css('font-size') == '26px') {
+    $('label[for="donation_amount_1000"]').text('1K');
+    $('label[for="donation_amount_2500"]').text('2.5K');
+    $('input.success-button').val('Continue');
+    }
+    $(window).resize(function(){
+        if($('.content-pages-show-donation-wide h1').css('font-size') == '26px') {
+        $('label[for="donation_amount_1000"]').text('$1K');
+        $('label[for="donation_amount_2500"]').text('$2.5K');
+        $('input.success-button').val('Continue');
+    } else {
+        $('label[for="donation_amount_1000"]').text('$1,000');
+        $('label[for="donation_amount_2500"]').text('$2,500');      
+        $('input.success-button').val('Continue to Paypal');
+    }
+    });
+
+});
+</script>
+
+{% include "breadcrumbs" %}
+
+<div class="donate-fixed-header">
+<a href="https://clockshop.org/">
+    <img class="logo-h" src="http://d3n8a8pro7vhmx.cloudfront.net/themes/53feaa2bebad6464d4000001/attachments/original/1513804117/logo_h.svg?1513804117">
+</a>
+<div>
+    <p>
+    <span class="one-time active">
+        Donate <br>One Time
+    </span>
+    <a class="monthly" href="https://clockshop.nationbuilder.com/monthly_contribution?utm_campaign=ask_2016&utm_campaign=ask_2016&utm_medium=email&utm_medium=email&utm_source=clockshop&utm_source=clockshop">
+        Donate <br>Monthly
+    </a>
+    </p>
+</div>
+</div>
+
+{% if page.headline.size > 0 %}
+<h1>{{ page.headline }}</h1>
+{% endif %}
+
+{% if page.donation.content.size > 0 %}
+{{ page.donation.content }}
+{% endif %}
+
+<div class="donationform-section bank-account hide">
+{% if page.donation.has_merchant_account? == false %}
+No bank account: This page will not work until you add a bank account
+{% elsif page.donation.merchant_account.is_test_mode? %}
+Testing mode: Transactions will not be processed. Use your regular credit card to test, you will not actually be charged.
+{% endif %}
+</div>
+
+{% if page.show_social_slider? and page.public_activities_count > 0 %}
+{% include "social_slider" %}
+{% endif %}
+
+{% assign thermo_width = 50 %}
+
+{% if page.donation.has_amount_goal? %}
+{% if page.donations_count < 1 %}
+JUST STARTED
+{% else %}
+{{ page.donations_amount_format }} raised
+{% endif %}
+GOAL: {{ page.donation.amount_goal_format }}
+{% elsif page.donation.has_donor_goal? %}
+{% if page.donations_count < 2 %}
+JUST STARTED
+{% else %}
+{{ page.donations_count }} donors
+{% endif %}
+{{ page.donation.donor_goal }} donors
+{% endif %} {% form_for donation autocomplete:off %}
+
+{% error_messages_for donation %}
+
+<!-- Donation amounts -->
+<div class="donationform-section amount">
+<p>Please select the amount you would like to contribute:</p>
+{% if request.current_order %}
+{% for item in request.current_order.items %}
+{% if item.num_time_periods and item.time_period_type %}
+{{ item.quantity }} {{ item.name }} @ {{ item.amount }} - billed automatically every {{ item.num_time_periods }} {{item.time_period_type }}
+{% else %}
+{{ item.quantity }} {{ item.name }} @ {{ item.amount }}
+{% endif %}
+{% endfor %}
+<a href="{{ page.donation.clear_order_url }}">Clear order</a>
+{% elsif page.donation.donation_frequency == "monthly" %}
+{% if page.donation.amount_in_cents != 0 %}
+<h4 class="padbottomless">{{ page.donation.amount_formatted }}</h4>
+<div class="row-fluid">
+    <div class="span12 padbottomless">Your credit card will be billed every month</div>
+</div>
+{% else %}
+<div class="radio-inline">{{ page.donation.form_amount_options }}</div>
+<div class="row-fluid">
+    <div class="span12 padbottomless">Your credit card will be billed every month</div>
+</div>
+{% endif %}
+{% else %}
+{% if page.donation.amount_in_cents != 0 %}
+<h4 class="padbottomless">{{ page.donation.amount_formatted }}</h4>
+{% else %}
+<div class="radio-inline">{{ page.donation.form_amount_options }}</div>
+{% endif %}
+{% if page.donation.max_installments > 1 %}
+<label for="num_installments" class="padbottomless">I want to pay this in {% collection_select "num_installments", page.donation.installment_collection, class:"select" %} installments</label>
+{% endif %}
+{% endif %}
+
+</div>
+<!-- End donation amounts -->
+
+<div class="donationform-section additional-info">
+<h3>Additional information</h3>
+<h4>How did you hear about Clockshop?</h4>
+<table>
+    <tbody>
+    <tr>
+        <td><input name="donation[tag_list]" value="discovered via experiencing a project" id="experienced" type="checkbox" class="user-success"><label for="experienced">Experienced one of your projects</label></td>
+        <td><input name="donation[tag_list]" value="discovered via email" id="email" type="checkbox"><label for="email">Email</label></td>
+    </tr>
+
+    <tr>
+        <td><input name="donation[tag_list]" value="discovered via website" id="website" type="checkbox"><label for="website">Website</label></td>
+        <td><input name="donation[tag_list]" value="discovered via social media" id="social" type="checkbox"><label for="social">Social media</label></td>
+    </tr>
+
+    <tr>
+        <td><input name="donation[tag_list]" value="discovered via a friend" id="friend" type="checkbox"><label for="friend">From a friend</label></td>
+        <td><input name="donation[tag_list]" value="discovered via something else" id="other" type="checkbox"><label for="other">Other</label></td>
+    </tr>
+
+    </tbody>
+</table>
+</div>
+
+<div class="donationform-section comments">
+<h4>Comments</h4>
+{% text_field "note", class:"text", placeholder:"Comments about your donation..." %}
+</div>
+
+<div class="donationform-section billing">
+<h3>Billing information</h3>
+
+{% text_field "first_name", class:"text", placeholder:"First name" %}
+{% text_field "last_name", class:"text", placeholder:"Last name" %}
+{% if page.donation.merchant_account.is_employer_and_occupation_required? %}
+Employer{% text_field "employer", class:"text" %}
+Occupation{% text_field "occupation", class:"text" %}
+{% if page.donation.merchant_account.is_employer_address_required? %}
+Employer Country{% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select fullwidth" %}
+Employer Address {% text_field "work_address.address1", class:"text" %} {% text_field "work_address.address2", class:"text" %} {% text_field "work_address.address3", class:"text work-not-us-or-canada hide" %}
+Employer City{% text_field "work_address.city", class:"text" %}
+State{% text_field "work_address.state", class:"text" %}
+Postal code{% text_field "work_address.zip", class:"text" %}
+{% elsif page.donation.merchant_account.is_employer_city_required? %}
+Employer Country{% collection_select "work_address.country_code", page.donation.countries, "code", "name", class:"select fullwidth" %}
+Employer City{% text_field "work_address.city", class:"text" %}
+State{% text_field "work_address.state", class:"text" %}
+Postal code{% text_field "work_address.zip", class:"text" %}
+{% endif %}
+Law requires we ask for your employer and occupation. If you don't have an employer or are retired, put N/A, and if you are self-employed put "self-employed" in employer and describe your occupation.
+{% endif %}
+Country*{% collection_select "billing_address.country_code", page.donation.countries, "code", "name", class:"select fullwidth" %}
+{% text_field "billing_address.address1", class:"text", placeholder:"Address" %}
+{% text_field "billing_address.address2", class:"text", placeholder:"Address Line 2" %}
+{% text_field "billing_address.address3", class:"text not-us-or-canada hide", placeholder:"Address Line 3" %}
+{% text_field "billing_address.city", class:"text", placeholder:"City" %}
+State*{% collection_select "billing_address.state", page.donation.us_states, "code", "name", class:"select" %}
+{% text_field "billing_address.zip", class:"text", placeholder:"Zip" %}
+{% email_field "email", class:"text", placeholder:"Email" %}
+{% phone_field "billing_address.phone_number", class:"text", placeholder:"Phone" %}
+<div class="margin">
+
+</div>
+</div>
+
+<div class="donationform-section payment-section">
+{% if page.donation.merchant_account.is_corporate_contribution_required? %}
+{% check_box "is_corporate_contribution", class:"checkbox" %} This is a contribution from a business.
+{% endif %} 
+
+{% for cf in custom_fields.donation %}
+{% assign custom_field = cf[1] %} {% assign custom_field_id = 'custom_values.' | append: custom_field.slug %}
+{% if custom_field.is_text? or custom_field.is_number? %} {{ custom_field.name }} {% text_field custom_field_id, class:"text" %} {% elsif custom_field.is_boolean? %} {% check_box custom_field_id, class:"checkbox" %} {{ custom_field.name }} {% elsif custom_field.is_multiple_choice? %} {{ custom_field.name }} {% collection_select custom_field_id, custom_fields.donation[custom_field.slug].multiple_choice_options, class:"select fullwidth" %} {% endif %}
+{% endfor %}
+
+{% if page.donation.merchant_account.is_taxable? %}
+Contributions are not tax deductible.
+{% else %}
+Contributions are tax deductible.
+{% endif %}
+
+<br />
+
+{% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? == false %}
+{% text_field "card_number", class:"text", placeholder:"Card number" %}
+{{ page.donation.merchant_account.accepted_card_icons }}<br /><br />
+Expires<br />{{ page.donation.form_card_expires_on }}
+{% text_field "card_verification", class:"text", placeholder:"Security code" %}
+{% endif %}
+
+{% if page.donation.merchant_account.has_contribution_rules? %} Contribution rules {{ page.donation.merchant_account.contribution_rules }} {% check_box "is_confirmed", class:"checkbox" %} I confirm that the above statements are true and accurate. {% endif %}
+{% if page.donation.merchant_account.is_de? %} {% check_box "is_de_confirmed", class:"checkbox" %} I agree to the Democracy Engine Terms of Service and Privacy Policy. You will not receive any emails from them, they just deliver your donation to us. {% endif %}
+{% if site.ask_to_publish_to_stream? %} {% check_box "is_private", class:"checkbox" %} I'd like my name to remain annonymous{% endif %}
+{% if page.donation.has_merchant_account? and page.donation.merchant_account.is_paypal_express? %}
+{{ page.donation.merchant_account.accepted_card_icons }}
+{% submit_tag "Continue to Paypal", class:"success-button" %}
+{% else %}
+{% submit_tag "Process Donation", class:"submit-button" %}
+{% endif %}
+{% endform_for %} {% if page.tags_count > 0 %}
+{% include "page_tags" with page %}
+{% endif %} {% if page.show_stream? %} {% include "page_stream" %} {% endif %}
+</div>
